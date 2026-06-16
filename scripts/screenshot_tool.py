@@ -1,10 +1,9 @@
 """
-Screenshot Tool - 微信风格截图工具
-- Ctrl+Shift+A 全局快捷键触发截图
-- 鼠标拖拽选择区域，支持调整大小
-- 截图自动复制到剪贴板 + 保存到桌面
+Screenshot & Screen Recorder Tool
+- Ctrl+Shift+A 截图
+- Ctrl+Shift+R 录屏（带视频裁剪）
 
-Requirements: pip install Pillow mss keyboard pywin32
+Requirements: pip install Pillow mss keyboard pywin32 opencv-python numpy
 Platform: Windows 10/11
 """
 
@@ -432,26 +431,35 @@ def take_screenshot():
 
 def main():
     """主函数：注册全局快捷键并等待"""
+    # 导入录屏模块
+    from screen_recorder import start_or_stop_recording, RECORD_HOTKEY
+
     print("=" * 50)
-    print("  Screenshot Tool (WeChat-style)")
+    print("  Screenshot & Recording Tool")
     print("=" * 50)
-    print(f"  Hotkey: {HOTKEY.upper()}")
+    print(f"  Screenshot: {HOTKEY.upper()}")
+    print(f"  Recording:  {RECORD_HOTKEY.upper()}")
     print(f"  Save to: {SAVE_DIR}")
     print("  Usage:")
+    print("    [Screenshot]")
     print("    - Drag to select area")
     print("    - Drag edges/corners to resize")
-    print("    - Drag inside to move selection")
     print("    - Double-click / Enter to confirm")
     print("    - Esc / Right-click to cancel")
+    print("    [Recording]")
+    print("    - Select region, then recording starts")
+    print("    - Press hotkey again or click Stop")
+    print("    - Trim video with slider, then save")
     print("  Press Ctrl+C to exit")
     print("=" * 50)
 
     keyboard.add_hotkey(HOTKEY, take_screenshot)
+    keyboard.add_hotkey(RECORD_HOTKEY, start_or_stop_recording)
 
     try:
         keyboard.wait()
     except KeyboardInterrupt:
-        print("\n[Screenshot Tool] Exited")
+        print("\n[Tool] Exited")
         sys.exit(0)
 
 

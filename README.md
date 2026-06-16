@@ -1,15 +1,12 @@
-# Screenshot Tool Skill
+# Screenshot & Recording Tool Skill
 
-A WeChat-style screenshot tool for Windows, packaged as a Claude Code / Ducc skill.
+A WeChat-style screenshot + screen recording tool for Windows, with video trimming support.
 
 ## Features
 
-- **Global Hotkey**: `Ctrl+Shift+A` to trigger screenshot
-- **Region Selection**: Drag to select area with visual feedback
-- **Resizable**: 8-direction resize handles (corners + edges)
-- **Movable**: Drag inside selection to reposition
-- **Auto Clipboard**: Copies screenshot to clipboard (paste anywhere)
-- **Auto Save**: Saves PNG to Desktop with timestamp
+- **Screenshot** (`Ctrl+Shift+A`): Drag to select, resize handles, auto clipboard + save
+- **Screen Recording** (`Ctrl+Shift+R`): Region recording with floating timer
+- **Video Trimmer**: Trim recorded video with timeline slider before saving
 
 ## Requirements
 
@@ -21,24 +18,23 @@ A WeChat-style screenshot tool for Windows, packaged as a Claude Code / Ducc ski
 ### As a standalone tool
 
 ```bash
-pip install Pillow mss keyboard pywin32
+pip install Pillow mss keyboard pywin32 opencv-python numpy
 python scripts/screenshot_tool.py
 ```
 
 ### As a Ducc/Claude Code skill
 
-Copy the `screenshot-tool-skill` folder to `~/.claude/skills/screenshot-tool/`
+Copy to `~/.claude/skills/screenshot-tool/`
 
 ## Usage
 
 1. Run `python scripts/screenshot_tool.py`
-2. Press `Ctrl+Shift+A` to start screenshot
-3. Drag to select area
-4. Adjust with edge/corner handles if needed
-5. Double-click / Enter / click ✓ to confirm
-6. Press Esc / Right-click / click ✗ to cancel
+2. **Screenshot**: Press `Ctrl+Shift+A` → drag region → Enter/double-click to confirm
+3. **Recording**: Press `Ctrl+Shift+R` → select region → recording starts → press again to stop → trim & save
 
-Screenshots are saved to `~/Desktop/screenshot_YYYYMMDD_HHMMSS.png`
+Output files are saved to Desktop:
+- Screenshots: `screenshot_YYYYMMDD_HHMMSS.png`
+- Recordings: `recording_YYYYMMDD_HHMMSS.avi`
 
 ## License
 
